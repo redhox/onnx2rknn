@@ -1,0 +1,9 @@
+version: '3'
+services:
+  onnx:
+    build:
+      context: .
+      dockerfile: Dockerfille
+    container_name: onnx2rknn
+    volumes:
+      ['./:/app'] 

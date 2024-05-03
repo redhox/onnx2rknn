@@ -1,0 +1,29 @@
+FROM python:3.8-slim-buster
+RUN apt-get update && apt-get install -y python3-opencv
+
+
+WORKDIR /app
+COPY app.py /app/
+COPY requierments.txt /app/requierments.txt
+COPY rknn_toolkit2-2.0.0b0+9bab5682-cp38-cp38-linux_x86_64.whl /app/rknn_toolkit2-2.0.0b0+9bab5682-cp38-cp38-linux_x86_64.whl
+RUN pip install --upgrade pip
+RUN pip install oauthlib requests-oauthlib 
+RUN pip install protobuf==3.20.3
+
+RUN pip install psutil>=5.9.0
+RUN pip install ruamel.yaml>=0.17.4
+RUN pip install scipy>=1.5.4
+RUN pip install tqdm>=4.64.0
+RUN pip install opencv-python>=4.5.5.64
+RUN pip install fast-histogram>=0.11
+
+# base
+RUN pip install onnx==1.14.1
+RUN pip install onnxoptimizer==0.2.7
+RUN pip install onnxruntime==1.16.0
+RUN pip install torch==1.10.1
+RUN pip install tensorflow==2.8.0
+
+
+RUN pip install rknn_toolkit2-2.0.0b0+9bab5682-cp38-cp38-linux_x86_64.whl
+CMD ["python", "./app.py"]
